@@ -220,12 +220,16 @@ function animate(){
                     setTimeout(()=>{
                     projectiles.splice(projectileIndex,1)
                 },0) 
+                    var audio_bubble = new Audio("../Assets/Audio/Bubble.wav")
+                    audio_bubble.play()
                 }
                 else{
                      // Increasing our score when fully destroyed 
                     score += 100
                     scoreEL.innerHTML = score
                     setTimeout(()=>{
+                        var audio_destroy = new Audio("../Assets/Audio/Shoot.wav")
+                        audio_destroy.play()
                         enemies.splice(index,1)
                         projectiles.splice(projectileIndex,1)
                         },0) 
@@ -239,6 +243,8 @@ function animate(){
 
 // Creating Event Listner 
 addEventListener('click', (Event)=>{
+    var audio_shoot = new Audio("../Assets/Audio/Destroy.wav")
+    audio_shoot.play()
     console.log(projectiles)
     const angle = Math.atan2(Event.clientY- canvas.height / 2 ,  Event.clientX - canvas.width / 2)
     const velocity = {
