@@ -1,3 +1,5 @@
+// Author : Utkarsh Pratap Singh
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 canvas.width = innerWidth
@@ -146,7 +148,7 @@ function spawnEnemies(){
         enemies.push(new Enemy(
             x,y,radius,color,velocity
         ))
-    }, 1000)
+    }, 1300)
 }
 
 // ======================================== End of Enemies Attack Initialization==================================
@@ -163,14 +165,14 @@ function animate(){
     c.fillStyle = 'rgba(0,0,0,0.1)'
     c.fillRect(0,0,canvas.width,canvas.height)
     player.draw()
-    particles.forEach((particle,Index) =>{
+    particles.forEach((particle,index) =>{
         if(particle.alpha <= 0 ){
-            particle.splice(Index,1)
+            particles.splice(index,1)
         }else{
             particle.update()
         }
     })
-    projectiles.forEach((projectile , Index) => {
+    projectiles.forEach((projectile , index) => {
         projectile.update()
         // Destroy the Projectiles after the edge of the screen  
         if( projectile.x - projectile.radius < 0 ||
@@ -178,7 +180,7 @@ function animate(){
             projectile.y + projectile.radius < 0 ||
             projectile.y - projectile.radius > canvas.height ){
             setTimeout(()=>{
-                    projectiles.splice(Index,1)
+                    projectiles.splice(index,1)
                 },0)
         }
      });
@@ -201,7 +203,7 @@ function animate(){
                 // Making shrinking Particles
                 // Create Shrinking Explosions
                 for(let i =0; i < enemy.radius*2 ;i++){
-                    particles.push(new Particle(
+                        particles.push(new Particle(
                         projectile.x, projectile.y,
                         Math.random()*2,enemy.color,
                         {x:(Math.random()-0.5)*(Math.random()*5),
@@ -258,3 +260,4 @@ startGameBtn.addEventListener('click',()=>{
     spawnEnemies()
     modelEl.style.display = 'none'
 })
+// <=======================================End of the Code=================================>
